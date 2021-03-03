@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/html">
+<head>
+    <title>Sidebar 09</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" th:href="@{/css/styling.css}">
+</head>
+
+<body style="background-image: url('https://www.incimages.com/uploaded_files/image/1920x1080/getty_883231284_200013331818843182490_335833.jpg');
+        background-repeat: no-repeat; background-attachment: fixed ">
+<div>
+<div style="width: 100%">
+    <div>
+        <h1><a href="#">Twirling </a></h1>
+        <p>template design by <a href="http://www.freecsstemplates.org/">CSS Templates</a></p>
+    </div>
+<!--    <div id="search">-->
+<!--        <form method="get" action="">-->
+<!--            <fieldset>-->
+<!--                <input type="text" name="s" id="search-text" size="15" value="enter keywords here..." />-->
+<!--                <input type="submit" id="search-submit" value="GO" />-->
+<!--            </fieldset>-->
+<!--        </form>-->
+<!--    </div>-->
+</div>
+<div class="wrapper d-flex align-items-stretch" >
+    <nav id="sidebar" style="height: 850px; background-color: blanchedalmond!important">
+        <div class="img bg-wrap text-center py-4">
+            <div class="user-logo">
+                <div class="img" ></div>
+            </div>
+        </div>
+        <ul class="list-unstyled components mb-5" style="background-color: blanchedalmond !important; ">
+            <li class="active">
+                <a  th:href="@{/lib-dashboard}" style="color: #1d2124"><span class="fa fa-home mr-3"></span> Home</a>
+            </li>
+            <li>
+                <a  th:href="@{/book-stock}" style="color: #1d2124"><span class="fa fa-gift mr-3"></span> Book Stock</a>
+            </li>
+            <li>
+                <a  th:href="@{/add-books}" style="color: #1d2124"><span class="fa fa-download mr-3 notif"><small class="d-flex align-items-center justify-content-center">5</small></span> Add Books</a>
+            </li>
+            <li>
+                <a  th:href="@{/borrowed-books}" style="color: #1d2124"><span class="fa fa-gift mr-3"></span> Borrowed Books</a>
+            </li>
+            <li>
+                <a  th:href="@{/borrowers-card}" style="color: #1d2124"><span class="fa fa-gift mr-3"></span> Issue Borrower card</a>
+            </li>
+            <li>
+                <a href="#" th:href = "@{/logout}" style="color: #1d2124"><span class="fa fa-sign-out mr-3"></span> Sign Out</a>
+            </li>
+        </ul>
+    </nav>
+
+<!--    Home completed-->
+    <div th:if="${list}" >
+        <div class="container my-2">
+            <h1> List of Registered Patrons</h1>
+
+            <table class="table table-striped table-responsive-md">
+                <thead>
+                <tr>
+                    <th> Patron Name</th>
+                    <th> Borrower card</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="patron : ${patronList}">
+                    <td th:text="${patron.nameOfPatron}"></td>
+                    <td th:text="${patron.libraryCard}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+    <!--            Second Not completed-->
+    <div th:if="${librarianStock}" >
+        <div class="container my-2">
+            <h1> Books in Stock</h1>
+
+            <table border="1" class="table table-striped table-responsive-md">
+                <thead>
+                <tr>
+                    <th> </th>
+                    <th> Category </th>
+                    <th> Name</th>
+                    <th> Author </th>
+                    <th> Quantity available</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="book : ${bookList}">
+                    <td ><img src="https://www.incimages.com/uploaded_files/image/1920x1080/getty_883231284_200013331818843182490_335833.jpg"
+                              alt="Book" width="130px" height="100px"></td>
+                    <td th:text="${book.category}"></td>
+                    <td th:text="${book.bookName}"></td>
+                    <td th:text="${book.author}"></td>
+                    <td th:text="${book.quantity}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!--            third Completed-->
+    <div th:if="${addbook}" >
+        <h1>Add books to Library</h1>
+        <div class="container my-2" >
+            <form action="#" th:action="@{/addBook}" th:object = "${addbook}", method="POST">
+                <div>
+                    <label>Name of Book</label>
+
+                    <input type="text" th:field="*{bookName}" class="form-control mb-4 col-4" style="width: 600px! important; margin: 0;" required>
+
+                </div>
+
+                <div>
+                    <label>Category</label>
+
+                    <input type="text" th:field="*{category}" class="form-control mb-4 col-4" required>
+                </div>
+
+                <div>
+                    <label>Author</label>
+
+                    <input type="text" th:field="*{author}" class="form-control mb-4 col-4" required>
+                </div>
+
+                <div>
+                    <label>Quantity</label>
+
+                    <input type="text" th:field="*{quantity}" class="form-control mb-4 col-4" required>
+                </div>
+
+                <button type="submit" class="btn btn-info col-2"> Add Book</button>
+
+            </form>
+
+        </div>
+    </div>
+
+    <!--        fourth-->
+    <div th:if="${borrowedBooks}" >
+        <div class="container my-2">
+            <h1> Borrowed Books</h1>
+
+            <table border="1" class="table table-striped table-responsive-md" style="width: 600px !important;">
+                <thead>
+                <tr>
+                    <th> Book Name</th>
+                    <th> Borrowers Name</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="salary : ${salaryList}">
+                    <td th:text="${salary.month}"></td>
+                    <td th:text="${salary.amount}"></td>
+                </tr>
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+
+<!--        fifth-->
+        <div th:if="${borrowersCard}" >
+            <div class="container my-2">
+                <table class="table table-striped table-responsive-md">
+                <thead>
+                <tr>
+                    <th> Patron Name</th>
+                    <th>Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="patron : ${noBorrowcard}">
+                    <td th:text="${patron.nameOfPatron}"></td>
+                    <td><a th:href="@{/issueCard/{id}(id=${patron.id})}" class = "btn btn-success" >Issue Card</a></td>
+                </tr>
+                </tbody>
+            </table>
+
+            </div>
+        </div>
+</div>
+</div>
+
+<script src="js/jquery.min.js"></script>
+<script src="js/popper.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/main.js"></script>
+
+<script>
+    function terms_changed(termsCheckBox){
+        //If the checkbox has been checked
+        if(termsCheckBox.checked){
+            //Set the disabled property to FALSE and enable the button.
+            document.getElementById("submit_button").disabled = false;
+        } else{
+            //Otherwise, disable the submit button.
+            document.getElementById("submit_button").disabled = true;
+        }
+    }
+</script>
+</body>
+</html>
