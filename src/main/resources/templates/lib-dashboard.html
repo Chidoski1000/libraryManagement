@@ -14,22 +14,8 @@
 </head>
 
 <body style="background-image: url('https://www.incimages.com/uploaded_files/image/1920x1080/getty_883231284_200013331818843182490_335833.jpg');
-        background-repeat: no-repeat; background-attachment: fixed ">
+        background-repeat: no-repeat; background-attachment: fixed; opacity: 1">
 <div>
-<div style="width: 100%">
-    <div>
-        <h1><a href="#">Twirling </a></h1>
-        <p>template design by <a href="http://www.freecsstemplates.org/">CSS Templates</a></p>
-    </div>
-<!--    <div id="search">-->
-<!--        <form method="get" action="">-->
-<!--            <fieldset>-->
-<!--                <input type="text" name="s" id="search-text" size="15" value="enter keywords here..." />-->
-<!--                <input type="submit" id="search-submit" value="GO" />-->
-<!--            </fieldset>-->
-<!--        </form>-->
-<!--    </div>-->
-</div>
 <div class="wrapper d-flex align-items-stretch" >
     <nav id="sidebar" style="height: 850px; background-color: blanchedalmond!important">
         <div class="img bg-wrap text-center py-4">
@@ -60,6 +46,7 @@
     </nav>
 
 <!--    Home completed-->
+    <div style="margin-left: 220px">
     <div th:if="${list}" >
         <div class="container my-2">
             <h1> List of Registered Patrons</h1>
@@ -94,17 +81,17 @@
                     <th> Category </th>
                     <th> Name</th>
                     <th> Author </th>
-                    <th> Quantity available</th>
+<!--                    <th> Quantity available</th>-->
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="book : ${bookList}">
+                <tr th:each="book : ${bookList}" id="bold">
                     <td ><img src="https://www.incimages.com/uploaded_files/image/1920x1080/getty_883231284_200013331818843182490_335833.jpg"
                               alt="Book" width="130px" height="100px"></td>
                     <td th:text="${book.category}"></td>
                     <td th:text="${book.bookName}"></td>
                     <td th:text="${book.author}"></td>
-                    <td th:text="${book.quantity}"></td>
+<!--                    <td th:text="${book.quantity}"></td>-->
                 </tr>
                 </tbody>
             </table>
@@ -135,11 +122,11 @@
                     <input type="text" th:field="*{author}" class="form-control mb-4 col-4" required>
                 </div>
 
-                <div>
-                    <label>Quantity</label>
+<!--                <div>-->
+<!--                    <label>Quantity</label>-->
 
-                    <input type="text" th:field="*{quantity}" class="form-control mb-4 col-4" required>
-                </div>
+<!--                    <input type="text" th:field="*{quantity}" class="form-control mb-4 col-4" required>-->
+<!--                </div>-->
 
                 <button type="submit" class="btn btn-info col-2"> Add Book</button>
 
@@ -157,13 +144,17 @@
                 <thead>
                 <tr>
                     <th> Book Name</th>
+                    <th> category</th>
+                    <th> Author </th>
                     <th> Borrowers Name</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="salary : ${salaryList}">
-                    <td th:text="${salary.month}"></td>
-                    <td th:text="${salary.amount}"></td>
+                <tr th:each="book : ${borrowedBooksList}">
+                    <td th:text="${book.bookName}"></td>
+                    <td th:text="${book.category}"></td>
+                    <td th:text="${book.author}"></td>
+                    <td th:text="${book.patron.nameOfPatron}"></td>
                 </tr>
                 </tbody>
             </table>
@@ -184,13 +175,14 @@
                 <tbody>
                 <tr th:each="patron : ${noBorrowcard}">
                     <td th:text="${patron.nameOfPatron}"></td>
-                    <td><a th:href="@{/issueCard/{id}(id=${patron.id})}" class = "btn btn-success" >Issue Card</a></td>
+                    <td><a th:href="@{/issueCard/{id}(id=${patron.patronId})}" class = "btn btn-success" >Issue Card</a></td>
                 </tr>
                 </tbody>
             </table>
 
             </div>
         </div>
+    </div>
 </div>
 </div>
 

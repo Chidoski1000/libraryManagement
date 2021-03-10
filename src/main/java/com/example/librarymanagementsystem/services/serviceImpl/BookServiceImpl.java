@@ -1,11 +1,13 @@
 package com.example.librarymanagementsystem.services.serviceImpl;
 
 import com.example.librarymanagementsystem.models.Book;
+import com.example.librarymanagementsystem.models.Patron;
 import com.example.librarymanagementsystem.repositories.BookRepository;
 import com.example.librarymanagementsystem.services.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -45,7 +47,37 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public Book addBook(Book book) {
-        return bookRepository.save(book);
+    public void addBook(Book book) {
+            bookRepository.save(book);
+    }
+
+    @Override
+    public void removeBook(Long bookId, Patron patron) {
+        Book book = bookRepository.findById(bookId).get();
+//        book.setPatron(patronList);
+        book.setPatron(patron);
+        bookRepository.save(book);
+    }
+
+    @Override
+    public List<Book> getBookAvailable() {
+        return bookRepository.findAllByPatronIsNull();
+    }
+
+    @Override
+    public void returnBook(Long bookId) {
+        Book book = bookRepository.findById(bookId).get();
+        book.setPatron(null);
+        bookRepository.save(book);
+    }
+
+    @Override
+    public List<Book> getMyBorrowedList(Patron patron) {
+        return bookRepository.findAllByPatron(patron);
+    }
+
+    @Override
+    public List<Book> getAllBorrowedList() {
+        return bookRepository.findAllByPatronIsNotNull();
     }
 }

@@ -1,6 +1,7 @@
 package com.example.librarymanagementsystem.services;
 
 import com.example.librarymanagementsystem.models.Book;
+import com.example.librarymanagementsystem.models.Patron;
 
 import java.util.List;
 import java.util.Optional;
@@ -16,5 +17,15 @@ public interface BookService {
 
     List<Book> getAllBooks();
 
-    Book addBook(Book book);
+    void addBook(Book book);
+
+    void removeBook(Long id, Patron patron);
+
+    void returnBook(Long bookId);
+
+    List<Book> getBookAvailable();
+
+    List<Book> getMyBorrowedList(Patron patron);
+
+    List<Book> getAllBorrowedList();
 }

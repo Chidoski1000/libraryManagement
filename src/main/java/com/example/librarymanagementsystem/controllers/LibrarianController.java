@@ -53,6 +53,8 @@ public class LibrarianController {
         if (userObj == null) return "redirect:/login";
 
         Book book = new Book();
+        int quantity = 0;
+        model.addAttribute("quantity", quantity);
         model.addAttribute("addbook", book);
         return "lib-dashboard";
     }
@@ -64,6 +66,7 @@ public class LibrarianController {
 
         Librarian lib  = (Librarian) (userObj);
         model.addAttribute("borrowedBooks", "");
+        model.addAttribute("borrowedBooksList", bookService.getAllBorrowedList());
         return "lib-dashboard";
     }
 

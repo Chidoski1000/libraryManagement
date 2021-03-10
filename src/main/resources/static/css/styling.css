@@ -76,6 +76,14 @@ h1, h2, h3, h4, h5, h6 {
 p {
     margin-top: 0;
     margin-bottom: 1rem; }
+div.sticky {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    background-color: Red;
+    padding: 5px;
+    font-size: 20px;
+}
 
 abbr[title],
 abbr[data-original-title] {
@@ -132,6 +140,10 @@ sub {
 
 sup {
     top: -.5em; }
+tr#bold{
+    font-size: large;
+    font-weight: bolder;
+}
 
 a {
     color: #007bff;
@@ -8177,14 +8189,16 @@ h1, h2, h3, h4, h5,
     width: 100%; }
 
 #sidebar {
-    min-width: 300px;
-    max-width: 300px;
+    min-width: 220px;
+    max-width: 220px;
+    /*position: -webkit-sticky;*/
+    position: fixed;
+    opacity: 0.5;
     background: #32373d;
     color: #fff;
     -webkit-transition: all 0.3s;
     -o-transition: all 0.3s;
-    transition: all 0.3s;
-    position: relative; }
+    transition: all 0.3s;}
 #sidebar .h6 {
     color: #fff; }
 #sidebar.active {

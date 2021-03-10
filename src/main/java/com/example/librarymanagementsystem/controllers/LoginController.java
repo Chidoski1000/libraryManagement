@@ -3,6 +3,7 @@ package com.example.librarymanagementsystem.controllers;
 import com.example.librarymanagementsystem.dto.LoginRequestDto;
 import com.example.librarymanagementsystem.models.Librarian;
 import com.example.librarymanagementsystem.models.Patron;
+import com.example.librarymanagementsystem.services.BookService;
 import com.example.librarymanagementsystem.services.LibrarianService;
 import com.example.librarymanagementsystem.services.PatronService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,11 +21,13 @@ import javax.servlet.http.HttpSession;
 public class LoginController {
     private LibrarianService librarianService;
     private PatronService patronService;
+    private BookService bookService;
 
     @Autowired
-    public LoginController(LibrarianService librarianService, PatronService patronService) {
+    public LoginController(LibrarianService librarianService, PatronService patronService, BookService bookService) {
         this.librarianService = librarianService;
         this.patronService = patronService;
+        this.bookService = bookService;
     }
 
     @GetMapping("/login")
@@ -48,6 +51,7 @@ public class LoginController {
             return "redirect:/lib-dashboard";
         }else{
             model.addAttribute("name", patron1.getNameOfPatron());
+
             session.setAttribute("thisPatron", patron1);
             return "redirect:/pat-dashboard";
         }
