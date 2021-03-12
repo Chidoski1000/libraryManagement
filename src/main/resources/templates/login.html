@@ -42,18 +42,24 @@
         </div>
 
 <!--        first-->
-        <div th:if="${patron}">
+        <div th:if="${user}">
 
 <!--            ************************-->
             <div class="wrap-login100 p-l-50 p-r-50 p-t-72 p-b-50">
-            <form class="login100-form validate-form" th:action="@{/signup}" th:object="${patron}", method="post">
+            <form class="login100-form validate-form" th:action="@{/signup}" th:object="${user}", method="post">
 					<span class="login100-form-title p-b-59">
 						Sign Up
 					</span>
 
                 <div class="wrap-input100 validate-input" data-validate="Name is required">
-                    <span class="label-input100">Full Name</span>
-                    <input class="input100" type="text" th:field="*{nameOfPatron}" name="name" placeholder="Name..." required>
+                    <span class="label-input100">First Name</span>
+                    <input class="input100" type="text" th:field="*{firstName}" name="name" placeholder="First Name" required>
+                    <span class="focus-input100"></span>
+                </div>
+
+                <div class="wrap-input100 validate-input" data-validate="Name is required">
+                    <span class="label-input100">Last Name</span>
+                    <input class="input100" type="text" th:field="*{lastName}" name="name" placeholder="Last Name" required>
                     <span class="focus-input100"></span>
                 </div>
 
@@ -65,15 +71,25 @@
 
                 <div class="wrap-input100 validate-input" data-validate = "Password is required">
                     <span class="label-input100">Password</span>
-                    <input class="input100" type="text" th:field="*{password}" name="pass" placeholder="**********" th:required="password">
+                    <input class="input100" type="password" th:field="*{password}" name="pass" placeholder="**********" th:required="password">
                     <span class="focus-input100"></span>
                 </div>
 
                 <div class="wrap-input100 validate-input" data-validate = "Repeat Password is required">
                     <span class="label-input100">Repeat Password</span>
-                    <input class="input100" type="text" name="repeat-pass" placeholder="**********" th:required="password">
+                    <input class="input100" type="password" name="repeat-pass" placeholder="**********" th:required="password">
                     <span class="focus-input100"></span>
                 </div>
+
+                <div>
+                    <span class="label-input100"> Select Role: </span>
+                    <select th:field="*{role}" required>
+                        <option selected hidden value="">Role</option>
+                        <option value="LIBRARIAN">Librarian</option>
+                        <option value="PATRON">Patron</option>
+                    </select>
+                </div>
+
 
                 <div class="container-login100-form-btn">
                     <div class="wrap-login100-form-btn">

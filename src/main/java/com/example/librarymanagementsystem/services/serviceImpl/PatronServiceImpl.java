@@ -4,6 +4,7 @@ import com.example.librarymanagementsystem.models.Patron;
 import com.example.librarymanagementsystem.repositories.PatronRepository;
 import com.example.librarymanagementsystem.services.PatronService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,10 +14,12 @@ import java.util.Optional;
 public class PatronServiceImpl implements PatronService {
 
     private PatronRepository patronRepository;
+    private PasswordEncoder passwordEncoder;
 
     @Autowired
-    public PatronServiceImpl(PatronRepository patronRepository) {
+    public PatronServiceImpl(PatronRepository patronRepository, PasswordEncoder passwordEncoder) {
         this.patronRepository = patronRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
@@ -33,6 +36,7 @@ public class PatronServiceImpl implements PatronService {
 
     @Override
     public Patron addPatron(Patron patron) {
+        patron.setPassword(passwordEncoder.encode(patron.getPassword()));
        return patronRepository.save(patron);
     }
 

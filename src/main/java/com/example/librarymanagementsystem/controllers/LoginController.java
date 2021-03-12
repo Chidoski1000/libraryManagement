@@ -30,14 +30,19 @@ public class LoginController {
         this.bookService = bookService;
     }
 
-    @GetMapping("/login")
+//    @GetMapping("/")
+//    public String startPage(){
+//        return "redirect:/user/login";
+//    }
+
+    @GetMapping("/")
     public String getLoginpage(Model model){
         model.addAttribute("userSignIn", new Patron());
         model.addAttribute("loginRequestDto", new LoginRequestDto());
         return "login";
     }
 
-    @PostMapping("/login")
+    @PostMapping("/")
     public String getLoginpage(HttpSession session, Model model, RedirectAttributes redirectAttributes, @ModelAttribute("loginRequestDto") LoginRequestDto loginRequestDto){
         Librarian librarian1 = librarianService.getLibrarianByEmailAndPassword(loginRequestDto.getEmail(), loginRequestDto.getPassword());
         Patron patron1 = patronService.getPatronByEmailAndPassword(loginRequestDto.getEmail(), loginRequestDto.getPassword());
@@ -55,8 +60,6 @@ public class LoginController {
             session.setAttribute("thisPatron", patron1);
             return "redirect:/pat-dashboard";
         }
-
-
     }
 
     @GetMapping(value = "/logout")
@@ -65,6 +68,6 @@ public class LoginController {
         if (session != null) {
             session.invalidate();
         }
-        return "redirect:/login";
+        return "redirect:/";
     }
 }

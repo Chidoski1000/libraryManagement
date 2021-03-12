@@ -39,7 +39,7 @@ public class LibrarianController {
     @GetMapping("/book-stock")
     public String bookStock(Model model, HttpSession session){
         Object userObj = session.getAttribute("thisLibrarian");
-        if (userObj == null) return "redirect:/login";
+        if (userObj == null) return "redirect:/";
 
         Librarian lib  = (Librarian) (userObj);
         model.addAttribute("bookList", bookService.getAllBooks());

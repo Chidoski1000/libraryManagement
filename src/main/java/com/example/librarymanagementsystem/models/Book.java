@@ -10,10 +10,8 @@ import java.util.List;
 @Entity
 @Getter
 @Setter
-public class Book {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long bookId;
+public class Book extends BaseModels{
+
     private String bookName;
     private String category;
     private String author;
